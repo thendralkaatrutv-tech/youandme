@@ -1,0 +1,147 @@
+# YouAndMe — How to put your app live
+## Plain English. No coding knowledge needed.
+
+---
+
+## What you have (3 files):
+- `backend/server.js` — the engine that runs your app
+- `backend/package.json` — list of tools the engine needs
+- `frontend/index.html` — the actual app your users will see
+- `render.yaml` — tells Render how to run everything
+
+---
+
+## STEP 1 — Put the code on GitHub (your safe storage)
+
+1. Go to **github.com** and create a free account if you don't have one
+2. Click the green **"New"** button to create a new repository
+3. Name it `youandme` — leave everything else as default — click **Create repository**
+4. Download the free app **GitHub Desktop** from desktop.github.com
+5. Open GitHub Desktop → click **"Clone a repository"** → find `youandme` → pick where to save it on your computer
+6. Open that folder on your computer
+7. Copy all the files I gave you into that folder (backend folder, frontend folder, render.yaml)
+8. Go back to GitHub Desktop — you'll see all the files listed
+9. At the bottom left, type `First upload` in the box → click **Commit to main**
+10. Click **Push origin** at the top
+
+✅ Your code is now safely on GitHub.
+
+---
+
+## STEP 2 — Deploy the backend on Render (the live engine)
+
+1. Go to **render.com** and create a free account
+2. Click **"New +"** → choose **"Web Service"**
+3. Connect your GitHub account when it asks
+4. Find your `youandme` repository and click **Connect**
+5. Fill in these details:
+   - **Name:** youandme-backend
+   - **Build Command:** `cd backend && npm install`
+   - **Start Command:** `cd backend && node server.js`
+6. Scroll down to **Environment Variables** → click **Add Variable**:
+   - Key: `JWT_SECRET` → Value: any random long string like `mysecretkey123abc456` (make it up, just keep it secret)
+7. Click **Create Web Service**
+8. Wait 2-3 minutes — Render builds your app
+9. When it says **"Live"**, copy the URL it gives you — looks like: `https://youandme-backend.onrender.com`
+
+✅ Your backend is live.
+
+---
+
+## STEP 3 — Connect the frontend to your backend
+
+1. Open `frontend/index.html` in any text editor (like Notepad or TextEdit)
+2. Find this line near the top (around line 5 of the script section):
+   ```
+   : ''; // Same origin when deployed
+   ```
+3. Replace it with your Render URL:
+   ```
+   : 'https://youandme-backend.onrender.com';
+   ```
+4. Save the file
+
+---
+
+## STEP 4 — Put the frontend live (free, using GitHub Pages)
+
+1. Go back to your `youandme` folder
+2. Create a new folder inside called `docs`
+3. Move `frontend/index.html` into the `docs` folder
+4. Go to GitHub Desktop → you'll see the change
+5. Type `Add frontend` → **Commit to main** → **Push origin**
+6. Go to github.com → your `youandme` repository
+7. Click **Settings** → scroll down to **Pages**
+8. Under "Source", select **main branch** → select `/docs` folder → click **Save**
+9. GitHub gives you a free URL like: `https://yourusername.github.io/youandme`
+
+✅ Your app is live for anyone to use!
+
+---
+
+## STEP 5 — Test it
+
+1. Open your GitHub Pages URL on your phone and computer
+2. **Sign up** with one email on your phone
+3. **Sign up** with a different email on your computer
+4. Search for the other person by name
+5. Start chatting — messages arrive instantly!
+6. Try the 📎 button to send a photo
+7. Try the 📞 button for a voice call
+8. Try the 📹 button for a video call
+
+---
+
+## Adding a custom domain (optional)
+
+If you buy a domain like `youandme.com` from a site like Namecheap:
+
+1. Go to your domain registrar → DNS settings
+2. Add a CNAME record pointing to your GitHub Pages URL
+3. In GitHub → Settings → Pages → add your custom domain
+4. On Render → your service → Settings → add your domain too
+5. Both get free HTTPS (the padlock) automatically
+
+---
+
+## What your free plan gives you
+
+| What | Limit |
+|---|---|
+| Messages | Unlimited |
+| Users | Unlimited |
+| File uploads | 5GB storage |
+| Voice & video calls | Unlimited (uses your internet) |
+| Cost | Free to start |
+
+**Note:** Render's free plan "sleeps" after 15 minutes of no activity. When someone opens the app after a while, it takes ~30 seconds to wake up. To keep it always awake, upgrade to Render's paid plan ($7/month).
+
+---
+
+## If something doesn't work
+
+**Messages not arriving instantly?**
+→ Check that your Render URL is correctly pasted in index.html (Step 3)
+
+**App shows blank page?**
+→ Right-click the page → Inspect → Console tab → paste the red error here and I'll fix it
+
+**Video calls not connecting?**
+→ Make sure both people allowed camera/microphone access in their browser
+
+**Render says "Build failed"?**
+→ Paste the error log here and I'll tell you exactly what to fix
+
+---
+
+## Later upgrades (when you're ready)
+
+- Add it to the **App Store or Play Store** as a proper mobile app
+- Add **end-to-end encryption** so only the two chatters can read messages
+- **Real database** (PostgreSQL) to keep messages after server restarts
+- **SMS notifications** when someone sends you a message while you're offline
+- **Custom emoji reactions** on messages
+
+---
+
+Built with: Node.js + Socket.IO (backend) · Vanilla HTML/CSS/JS (frontend) · WebRTC (calls) · Render (hosting) · GitHub (code storage)
